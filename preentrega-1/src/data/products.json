@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "title": "AMD Ryzen 9 5900X 12-Core Processor",
+    "description": "High-performance processor ideal for gaming and content creation.",
+    "price": 549.99,
+    "thumbnails": ["cpu_image_url_1.jpg", "cpu_image_url_2.jpg"],
+    "code": "RYZEN5900X",
+    "stock": 30,
+    "status": true,
+    "category": "Electronics"
+  },
+  {
+    "id": "2",
+    "title": "Logitech MX Master 3 Wireless Mouse",
+    "description": "Ergonomic and precise wireless mouse with customizable buttons.",
+    "price": 99.99,
+    "thumbnails": ["mouse_image_url_1.jpg", "mouse_image_url_2.jpg"],
+    "code": "MXMASTER3",
+    "stock": 20,
+    "status": true,
+    "category": "Electronics"
+  },
+  {
+    "id": "3",
+    "title": "AMD Radeon RX 6800 XT",
+    "description": "Powerful gaming graphics card with high-speed performance and advanced features.",
+    "price": 749.99,
+    "thumbnails": [
+      "radeon_rx_6800xt_image_1.jpg",
+      "radeon_rx_6800xt_image_2.jpg"
+    ],
+    "code": "RX6800XT",
+    "stock": 40,
+    "status": true,
+    "category": "Electronics"
+  }
+]
