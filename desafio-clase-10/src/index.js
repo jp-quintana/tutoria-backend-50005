@@ -3,6 +3,9 @@ import handlebars from 'express-handlebars';
 import { Server } from 'socket.io';
 
 import viewsRoutes from './routes/views.routes.js';
+import productRoutes from './routes/product.routes.js';
+
+import { productManager } from './models/product.model.js';
 
 const app = express();
 
@@ -18,6 +21,7 @@ app.set('views', 'src/views');
 app.set('view engine', 'handlebars');
 
 app.use('/', viewsRoutes);
+app.use('/api/products', productRoutes);
 
 const PORT = 8080;
 
@@ -25,12 +29,25 @@ const httpServer = app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 
-const socketServer = new Server(httpServer);
+export const socketServer = new Server(httpServer);
 
-socketServer.on('connection', (socket) => {
+socketServer.on('connection', async (socket) => {
   console.log('Nuevo cliente conectado');
 
-  socket.on('addProduct', (data) => {
-    console.log(data);
+  try {
+    const products = await productManager.getProducts();
+    socket.emit('populateProducts', products);
+  } catch (err) {
+    console.error('Error loading products:', err);
+  }
+
+  socket.on('addProduct', async (data) => {
+    try {
+      await productManager.addProduct(data);
+      const products = await productManager.getProducts();
+      socket.emit('populateProducts', products);
+    } catch (err) {
+      console.log(err);
+    }
   });
 });

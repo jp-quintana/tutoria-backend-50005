@@ -88,20 +88,6 @@ class ProductManager {
       return products;
     }
   }
-
-  async getProductById(id) {
-    const products = await this.checkForFile();
-
-    const existingProduct = products.find(
-      (p) => p.id.toString() === id.toString()
-    );
-
-    if (!existingProduct) {
-      throw new Error(`Producto no encontrado`);
-    } else {
-      return existingProduct;
-    }
-  }
 }
 
 export const productManager = new ProductManager();
