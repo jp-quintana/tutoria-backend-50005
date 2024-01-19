@@ -1,0 +1,25 @@
+<h1>Home</h1>
+<div>
+  <table border='1'>
+    <thead>
+      <tr>
+        {{#each products}}
+          {{#if @first}}
+            {{#each this}}
+              <th>{{@key}}</th>
+            {{/each}}
+          {{/if}}
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+        <tr>
+          {{#each this}}
+            <td>{{this}}</td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
