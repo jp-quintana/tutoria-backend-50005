@@ -1,9 +1,45 @@
+import {
+  validateAddProduct,
+  validateEditProduct,
+} from '../../utils/validation.js';
 import { productDAO } from '../dao/product.dao.js';
 import { socketServer } from '../index.js';
 
-export const addProduct = async (req, res, next) => {
+export const getProducts = async (req, res, next) => {
   try {
-    const { body } = req;
+    const products = await productDAO.getProducts();
+
+    console.log(products);
+
+    // const products = await ProductModel.getProducts();
+    // socketServer.emit('populateProducts', products);
+    res.json({ products });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+};
+
+export const getProduct = async (req, res, next) => {
+  try {
+    const { pid } = req.params;
+
+    const product = await productDAO.getProductById(pid);
+
+    if (!product) throw new Error('Product not found');
+
+    res.json({ product });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+};
+
+export const addProduct = async (req, res, next) => {
+  const { body } = req;
+  try {
+    const missingProperty = validateAddProduct(body);
+
+    if (missingProperty)
+      throw new Error(`Missing property: ${missingProperty}`);
 
     await productDAO.addProduct(body);
 
@@ -11,6 +47,48 @@ export const addProduct = async (req, res, next) => {
     // socketServer.emit('populateProducts', products);
     res.json({ message: 'Successfully added product' });
   } catch (err) {
-    res.json({ message: err.message });
+    res.json({ error: err.message });
+  }
+};
+
+export const editProduct = async (req, res, next) => {
+  try {
+    const { body, params } = req;
+    const { pid } = params;
+
+    const validatedProduct = validateEditProduct(body);
+
+    if (Object.keys(validatedProduct).length === 0)
+      throw new Error(
+        'Must include at least one of the following properties:  title, description, price, thumbnail, code, stock, category'
+      );
+
+    const updatedProduct = await productDAO.editProduct({
+      id: pid,
+      obj: validatedProduct,
+    });
+
+    if (!updatedProduct) throw new Error('Product not found');
+
+    // const products = await ProductModel.getProducts();
+    // socketServer.emit('populateProducts', products);
+    res.json({ message: 'Successfully edited product' });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+};
+
+export const deleteProduct = async (req, res, next) => {
+  try {
+    const { pid } = req.params;
+    console.log('aca', pid);
+
+    const deletedProduct = await productDAO.deleteProduct(pid);
+
+    if (!deletedProduct) throw new Error('Product not found');
+
+    res.json({ message: 'Successfully deleted product' });
+  } catch (err) {
+    res.json({ error: err.message });
   }
 };

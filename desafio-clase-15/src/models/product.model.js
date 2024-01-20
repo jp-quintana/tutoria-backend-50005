@@ -37,7 +37,10 @@ productSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
-// esto lo agregas para que cualquiera propiedad virtual que hayas agregado efectivamente llegue al cliente/front
+// conservamos cualquier propiedad virtual (en nuestro caso id) cuando convertimos un doc de mongoose a json (ejemplo cuando enviamos la respuesta al cliente)
 productSchema.set('toJSON', { virtuals: true });
+
+// conservamos cualquier propiedad virtual (en nuestro caso id) cuando convertimos un doc de mongoose a un objeto de javascript (lo mismo que antes pero esto se hace para el lado del server)
+productSchema.set('toObject', { virtuals: true });
 
 export default mongoose.model('Product', productSchema);
