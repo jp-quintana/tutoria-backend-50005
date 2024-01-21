@@ -34,7 +34,7 @@ const productSchema = new mongoose.Schema({
 
 // esto hace que todas los instancias de este schema tengan una propiedad "id" que es igual a "_id" pero ya en string
 productSchema.virtual('id').get(function () {
-  return this._id.toHexString();
+  return this._id.toString();
 });
 
 // conservamos cualquier propiedad virtual (en nuestro caso id) cuando convertimos un doc de mongoose a json (ejemplo cuando enviamos la respuesta al cliente)

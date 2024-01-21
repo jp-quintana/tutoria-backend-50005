@@ -6,9 +6,11 @@ import { Server } from 'socket.io';
 
 import viewsRoutes from './routes/views.routes.js';
 import productRoutes from './routes/product.routes.js';
+import cartRoutes from './routes/cart.routes.js';
 
-import ProductModel from './models/product.model.js';
+import { productDAO } from './dao/product.dao.js';
 import { connectToDB } from './db/mongo.js';
+import { messageDAO } from './dao/message.dao.js';
 
 dotenv.config();
 
@@ -27,6 +29,7 @@ app.set('view engine', 'handlebars');
 
 app.use('/', viewsRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/carts', cartRoutes);
 
 const PORT = process.env.PORT || 8080;
 
@@ -43,20 +46,43 @@ const httpServer = app.listen(PORT, async () => {
 export const socketServer = new Server(httpServer);
 
 socketServer.on('connection', async (socket) => {
-  console.log('Nuevo cliente conectado');
+  // obtenemos de donde estamos recibiendo la peticion
+  const urlArr = socket.request.headers.referer.split('/'); // => '[ 'http:', '', 'localhost:8080', 'pathname' ]'
+  const pathname = urlArr[urlArr.length - 1].replace('?', ''); // => 'pathname'
 
-  try {
-    const products = await ProductModel.getProducts();
-    socket.emit('populateProducts', products);
-  } catch (err) {
-    console.error('Error loading products:', err);
+  if (pathname === 'realtimeproducts') {
+    try {
+      const products = await productDAO.getProducts();
+      socket.emit('populateProducts', products);
+    } catch (err) {
+      console.error('Error loading products:', err);
+    }
   }
 
   socket.on('addProduct', async (data) => {
     try {
-      await ProductModel.addProduct(data);
-      const products = await ProductModel.getProducts();
+      await productDAO.addProduct(data);
+      const products = await productDAO.getProducts();
       socket.emit('populateProducts', products);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  if (pathname === 'chat') {
+    try {
+      const messages = await messageDAO.getMessages();
+      socket.emit('populateMessages', messages);
+    } catch (err) {
+      console.error('Error loading messages:', err);
+    }
+  }
+
+  socket.on('addMessage', async (data) => {
+    try {
+      await messageDAO.addMessage(data);
+      const messages = await messageDAO.getMessages();
+      socket.emit('populateMessages', messages);
     } catch (err) {
       console.log(err);
     }

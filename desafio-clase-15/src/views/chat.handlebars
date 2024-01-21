@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="css/styles.css">
+
+<h1>Chat</h1>
+<div>
+  <form id='chatForm' class="form">
+      <label>
+        <span>Email:</span>
+        <input id="email" type='text' />
+      </label>
+      <label>
+        <span>Message:</span>
+        <input id="message" type='text' />
+      </label>
+    </div>
+    <button type='submit'>Submit</button>
+  </form>
+</div>
+<h2>Messages</h2>
+<ul id="chat">
+
+</ul>
+
+<script src='/socket.io/socket.io.js'></script>
+<script src='js/index.js'></script>

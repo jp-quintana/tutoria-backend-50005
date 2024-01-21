@@ -2,7 +2,8 @@ import productModel from '../models/product.model.js';
 
 class ProductDAO {
   async getProducts(limit) {
-    return await productModel.find().limit(limit);
+    // agregamos un lean() para convertir los docs de mongoose de este arreglo a objetos de js para poder enviarlos al front y que no haya errores
+    return await productModel.find().limit(limit).lean();
   }
 
   async getProductById(id) {

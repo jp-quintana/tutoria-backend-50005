@@ -11,7 +11,7 @@ export const getProducts = async (req, res, next) => {
 
     console.log(products);
 
-    // const products = await ProductModel.getProducts();
+    // const products = await productDAO.getProducts();
     // socketServer.emit('populateProducts', products);
     res.json({ products });
   } catch (err) {
@@ -43,8 +43,8 @@ export const addProduct = async (req, res, next) => {
 
     await productDAO.addProduct(body);
 
-    // const products = await ProductModel.getProducts();
-    // socketServer.emit('populateProducts', products);
+    const products = await productDAO.getProducts();
+    socketServer.emit('populateProducts', products);
     res.json({ message: 'Successfully added product' });
   } catch (err) {
     res.json({ error: err.message });
@@ -70,7 +70,7 @@ export const editProduct = async (req, res, next) => {
 
     if (!updatedProduct) throw new Error('Product not found');
 
-    // const products = await ProductModel.getProducts();
+    // const products = await productDAO.getProducts();
     // socketServer.emit('populateProducts', products);
     res.json({ message: 'Successfully edited product' });
   } catch (err) {

@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import {
-  homePage,
-  realTimeProductsPage,
+  renderHomePage,
+  renderRealTimeProductsPage,
+  renderChatPage,
 } from '../controllers/views.controller.js';
 
 const router = Router();
 
-router.get('/', homePage);
-router.get('/realtimeproducts', realTimeProductsPage);
+router.get('/', renderHomePage);
+router.get('/realtimeproducts', renderRealTimeProductsPage);
+router.get('/chat', renderChatPage);
 
 export default router;
