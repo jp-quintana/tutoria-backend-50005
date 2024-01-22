@@ -1,7 +1,7 @@
 import {
   validateAddProduct,
   validateEditProduct,
-} from '../../utils/validation.js';
+} from '../utils/validation.js';
 import { productDAO } from '../dao/product/index.js';
 import { socketServer } from '../index.js';
 
