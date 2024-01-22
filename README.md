@@ -7,3 +7,4 @@
 - [Desafío: Servidor con Express (Clase 6)](https://github.com/jp-quintana/tutoria-backend-50005/tree/main/desafio-clase-6)
 - [Desafío: Primera entrega de tu Proyecto Final (Clase 8)](https://github.com/jp-quintana/tutoria-backend-50005/tree/main/preentrega-1)
 - [Desafío: Websockets + Handlebars (Clase 10)](https://github.com/jp-quintana/tutoria-backend-50005/tree/main/desafio-clase-10)
+- [Desafío complementario: Práctica de integración sobre tu ecommerce (Clase 15)](https://github.com/jp-quintana/tutoria-backend-50005/tree/main/desafio-clase-15)
