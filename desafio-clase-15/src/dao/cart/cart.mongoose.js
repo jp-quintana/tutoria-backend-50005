@@ -1,10 +1,11 @@
-import cartModel from '../models/cart.model.js';
-import { productDAO } from './product.dao.js';
+import { productDAO } from '../product/index.js';
+import cartModel from '../../models/cart.model.js';
 
-class CartDAO {
+export class CartMongooseDAO {
   async getCarts() {
     return await cartModel.find();
   }
+
   async getCartById(id) {
     // aca podemos usar populate gracias a la referencia que establecimos en el schema de cart
     // eso hace que todos los productos dentro del carrito ya tengan sus propiedades
@@ -39,10 +40,6 @@ class CartDAO {
       (item) => item.product.id === pid
     );
 
-    for (const product of cart.products) {
-      console.log(product);
-    }
-
     if (existingCartProductIndex >= 0) {
       cart.products[existingCartProductIndex].quantity++;
     } else {
@@ -75,5 +72,3 @@ class CartDAO {
     return await cartModel.findOneAndDelete({ _id: id });
   }
 }
-
-export const cartDAO = new CartDAO();

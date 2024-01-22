@@ -1,1 +1,24 @@
-[{"id":"1","title":"AMD Ryzen 9 5900X 12-Core Processor","description":"High-performance processor ideal for gaming and content creation.","price":549.99,"thumbnail":"cpu_image_url_1.jpg","code":"RYZEN5900X","stock":30,"status":true,"category":"Electronics"},{"id":"2","title":"Logitech MX Master 3 Wireless Mouse","description":"Ergonomic and precise wireless mouse with customizable buttons.","price":99.99,"thumbnail":"mouse_image_url_1.jpg","code":"MXMASTER3","stock":20,"status":true,"category":"Electronics"},{"id":"3","title":"AMD Radeon RX 6800 XT","description":"Powerful gaming graphics card with high-speed performance and advanced features.","price":749.99,"thumbnail":"radeon_rx_6800xt_image_1.jpg","code":"RX6800XT","stock":40,"status":true,"category":"Electronics"},{"id":"4","title":"1","description":"1","price":1,"thumbnail":"1","code":"1","stock":1,"status":true,"category":"1"},{"id":"5","title":"1","description":"1","price":1,"thumbnail":"1","code":"11","stock":1,"status":true,"category":"1"},{"id":"6","title":"2","description":"2","price":2,"thumbnail":"2","code":"2","stock":2,"status":true,"category":"2"}]
+[
+  {
+    "id": "1",
+    "title": "Sony PlayStation 5",
+    "description": "Next-generation gaming console with cutting-edge hardware and immersive gaming experiences.",
+    "price": 499.99,
+    "thumbnail": "playstation5_image_1.jpg",
+    "code": "PS5",
+    "stock": 25,
+    "status": true,
+    "category": "Gaming Consoles"
+  },
+  {
+    "id": "2",
+    "title": "Logitech MX Master 3 Wireless Mouse",
+    "description": "Ergonomic and precise wireless mouse with customizable buttons.",
+    "price": 99.99,
+    "thumbnail": "mouse_image_url_1.jpg",
+    "code": "MXMASTER3",
+    "stock": 20,
+    "status": true,
+    "category": "Electronics"
+  }
+]

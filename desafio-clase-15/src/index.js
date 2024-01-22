@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import 'dotenv/config.js';
 
 import express from 'express';
 import handlebars from 'express-handlebars';
@@ -8,11 +8,9 @@ import viewsRoutes from './routes/views.routes.js';
 import productRoutes from './routes/product.routes.js';
 import cartRoutes from './routes/cart.routes.js';
 
-import { productDAO } from './dao/product.dao.js';
 import { connectToDB } from './db/mongo.js';
+import { productDAO } from './dao/product/index.js';
 import { messageDAO } from './dao/message.dao.js';
-
-dotenv.config();
 
 const app = express();
 

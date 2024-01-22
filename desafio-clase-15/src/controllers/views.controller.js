@@ -1,8 +1,7 @@
-import { productDAO } from '../dao/product.dao.js';
+import { productDAO } from '../dao/product/index.js';
 
 export const renderHomePage = async (req, res, next) => {
   const products = await productDAO.getProducts();
-  console.log(products);
   res.render('home', { title: 'Home', products });
 };
 

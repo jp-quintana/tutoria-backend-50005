@@ -2,14 +2,14 @@ import {
   validateAddProduct,
   validateEditProduct,
 } from '../../utils/validation.js';
-import { productDAO } from '../dao/product.dao.js';
+import { productDAO } from '../dao/product/index.js';
 import { socketServer } from '../index.js';
 
 export const getProducts = async (req, res, next) => {
   try {
-    const products = await productDAO.getProducts();
+    const { limit } = req.query;
 
-    console.log(products);
+    const products = await productDAO.getProducts(limit);
 
     // const products = await productDAO.getProducts();
     // socketServer.emit('populateProducts', products);
@@ -81,7 +81,6 @@ export const editProduct = async (req, res, next) => {
 export const deleteProduct = async (req, res, next) => {
   try {
     const { pid } = req.params;
-    console.log('aca', pid);
 
     const deletedProduct = await productDAO.deleteProduct(pid);
 

@@ -1,5 +1,4 @@
-import { cartDAO } from '../dao/cart.dao.js';
-import { productDAO } from '../dao/product.dao.js';
+import { cartDAO } from '../dao/cart/index.js';
 
 export const getCarts = async (req, res, next) => {
   try {
