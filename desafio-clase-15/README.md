@@ -5,9 +5,9 @@
 - Paso 1: clonar repositorio e instalar paquetes.
 
 ```
-git clone -b desafio-clase-15 https://github.com/jp-quintana/tutoria-backend-50005.git
+git clone https://github.com/jp-quintana/tutoria-backend-50005.git
 
-// ir al directorio creado
+// ir al directorio correspondiente
 
 npm i
 
