@@ -11,7 +11,6 @@ export const validateAddProduct = (body) => {
 
   for (const property of obligatoryProperties) {
     if (!(property in body)) {
-      console.log(property);
       return property;
     }
   }

@@ -7,13 +7,17 @@ import { socketServer } from '../index.js';
 
 export const getProducts = async (req, res, next) => {
   try {
-    const { limit } = req.query;
+    const { limit, sort, page, query } = req.query;
 
-    const products = await productDAO.getProducts(limit);
+    const paginationOptions = {
+      limit: !limit ? 10 : limit,
+      sort: sort ? { price: sort } : undefined,
+      page: page ? page : 1,
+    };
 
-    // const products = await productDAO.getProducts();
-    // socketServer.emit('populateProducts', products);
-    res.json({ products });
+    const products = await productDAO.getProducts(query, paginationOptions);
+
+    res.json({ status: 'success', ...products });
   } catch (err) {
     res.json({ error: err.message });
   }

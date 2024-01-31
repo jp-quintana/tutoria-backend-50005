@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
 const productSchema = new mongoose.Schema({
   title: {
@@ -29,8 +30,11 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  category: String,
+  category: { type: String, required: true },
 });
+
+// seteamos el paginate
+productSchema.plugin(paginate);
 
 // esto hace que todas los instancias de este schema tengan una propiedad "id" que es igual a "_id" pero ya en string
 productSchema.virtual('id').get(function () {

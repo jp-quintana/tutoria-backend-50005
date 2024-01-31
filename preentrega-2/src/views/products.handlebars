@@ -1,0 +1,32 @@
+<link rel='stylesheet' href='css/styles.css' />
+
+<h1>Products</h1>
+<div id="container">
+  <div>
+  <div id='products'>
+      {{#each products}}
+      <a href="
+      "></a>
+    <div id='product'>
+        <a href="http://localhost:8080/product/{{id}}">
+          {{this.title}}
+        </a>
+        <p>Add To cart</p>
+    </div>
+      {{/each}}
+  </div>
+  </table>
+  <div id='pagination'>
+    <div></div>
+    {{#if prevLink}}
+      <a href={{prevLink}}>Prev</a>
+    {{/if}}
+    <p>
+      {{{page}}}
+    </p>
+    {{#if nextLink}}
+      <a href={{nextLink}}>Next</a>
+    {{/if}}
+  </div>
+  </div>
+</div>
