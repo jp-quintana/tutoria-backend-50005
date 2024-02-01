@@ -1,3 +1,4 @@
+import { cartDAO } from '../dao/cart/index.js';
 import { productDAO } from '../dao/product/index.js';
 
 export const renderHomePage = async (req, res, next) => {
@@ -28,7 +29,7 @@ export const renderProductsPage = async (req, res, next) => {
   });
 };
 
-export const renderProduct = async (req, res, next) => {
+export const renderProductPage = async (req, res, next) => {
   const { pid } = req.params;
 
   const product = await productDAO.getProductById(pid);
@@ -45,4 +46,12 @@ export const renderRealTimeProductsPage = (req, res, next) => {
 
 export const renderChatPage = (req, res, next) => {
   res.render('chat', { title: 'Chat' });
+};
+
+export const renderCartPage = async (req, res, next) => {
+  const { cid } = req.params;
+
+  const cart = await cartDAO.getCartById(cid);
+
+  res.render('cart', { title: 'Cart', products: cart.products });
 };

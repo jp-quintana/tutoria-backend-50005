@@ -10,9 +10,11 @@ export class CartMongooseDAO {
     // aca podemos usar populate gracias a la referencia que establecimos en el schema de cart
     // eso hace que todos los productos dentro del carrito ya tengan sus propiedades
     // https://mongoosejs.com/docs/populate.html
-    return await cartModel
-      .findOne({ _id: id })
-      .populate({ path: 'products.product', model: 'Product' });
+    return await cartModel.findOne({ _id: id }).populate({
+      path: 'products.product',
+      model: 'Product',
+      options: { lean: { virtuals: true } },
+    });
   }
 
   async addCart() {

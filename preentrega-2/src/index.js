@@ -19,7 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // se declara
-app.engine('handlebars', handlebars.engine());
+app.engine(
+  'handlebars',
+  handlebars.engine({ allowProtoMethodsByDefault: true })
+);
 // se indica donde se van a guardar las vistas
 app.set('views', 'src/views');
 // se define cual se va a usar
