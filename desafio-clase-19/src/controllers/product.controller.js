@@ -3,7 +3,6 @@ import {
   validateEditProduct,
 } from '../utils/validation.js';
 import { productDAO } from '../dao/product/index.js';
-import { socketServer } from '../index.js';
 
 export const getProducts = async (req, res, next) => {
   try {
@@ -50,8 +49,6 @@ export const addProduct = async (req, res, next) => {
 
     await productDAO.addProduct(body);
 
-    const products = await productDAO.getProducts();
-    socketServer.emit('populateProducts', products);
     res.json({ message: 'Successfully added product' });
   } catch (err) {
     res.json({ error: err.message });
@@ -77,8 +74,6 @@ export const editProduct = async (req, res, next) => {
 
     if (!updatedProduct) throw new Error('Product not found');
 
-    // const products = await productDAO.getProducts();
-    // socketServer.emit('populateProducts', products);
     res.json({ message: 'Successfully edited product' });
   } catch (err) {
     res.json({ error: err.message });

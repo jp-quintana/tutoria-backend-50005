@@ -40,10 +40,6 @@ export const renderProductPage = async (req, res, next) => {
   });
 };
 
-export const renderRealTimeProductsPage = (req, res, next) => {
-  res.render('realTimeProducts', { title: 'Real Time Products' });
-};
-
 export const renderChatPage = (req, res, next) => {
   res.render('chat', { title: 'Chat' });
 };

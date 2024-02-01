@@ -15,8 +15,6 @@ git clone https://github.com/jp-quintana/tutoria-backend-50005.git
 
 npm i
 
-npm run setup
-
 ```
 
 - Paso 2: Setear el MongoDB Cluster.

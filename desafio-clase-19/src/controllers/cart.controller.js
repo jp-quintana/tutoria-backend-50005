@@ -4,8 +4,6 @@ export const getCarts = async (req, res, next) => {
   try {
     const carts = await cartDAO.getCarts();
 
-    // const products = await ProductModel.getProducts();
-    // socketServer.emit('populateProducts', products);
     res.json({ carts });
   } catch (err) {
     res.json({ error: err.message });
@@ -19,8 +17,6 @@ export const getCartProducts = async (req, res, next) => {
 
     if (!cart) throw new Error('Cart not found');
 
-    // const products = await ProductModel.getProducts();
-    // socketServer.emit('populateProducts', products);
     res.json({ cartProducts: cart.products });
   } catch (err) {
     res.json({ error: err.message });
@@ -31,8 +27,6 @@ export const addCart = async (req, res, next) => {
   try {
     await cartDAO.addCart();
 
-    // const products = await ProductModel.getProducts();
-    // socketServer.emit('populateProducts', products);
     res.json({ message: 'Successfully added cart' });
   } catch (err) {
     res.json({ error: err.message });
