@@ -15,7 +15,10 @@ export const getProducts = async (req, res, next) => {
       page: page ? page : 1,
     };
 
-    const products = await productDAO.getProducts(query, paginationOptions);
+    const products = await productDAO.getPaginatedProducts(
+      query,
+      paginationOptions
+    );
 
     res.json({ status: 'success', ...products });
   } catch (err) {

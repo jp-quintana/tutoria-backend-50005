@@ -28,7 +28,7 @@ export class CartMongooseDAO {
     // si no existe el carrito tiramos error
     if (!cart) throw new Error('Cart not found');
 
-    // buscamos product
+    // buscamos producto
     const product = await productDAO.getProductById(pid);
 
     // si no existe el producto tiramos error
@@ -61,6 +61,12 @@ export class CartMongooseDAO {
     // si no existe el carrito tiramos error
     if (!cart) throw new Error('Cart not found');
 
+    const existingCartProductIndex = cart.products.findIndex(
+      (item) => item.product.id === pid
+    );
+
+    if (existingCartProductIndex < 0) throw new Error('Product is not in cart');
+
     // dado populamos los productos cuando usamos getCartById todo los productos dentro de "cart" ya tienen todas sus propiedades!
     // probar con console.log(cart)
     cart.products = cart.products.filter((item) => item.product.id !== pid);
@@ -70,5 +76,53 @@ export class CartMongooseDAO {
 
   async deleteCart(id) {
     return await cartModel.findOneAndDelete({ _id: id });
+  }
+
+  async updateProductQuantity({ cid, pid, updatedQuantity }) {
+    let cart = await this.getCartById(cid);
+
+    // si no existe el carrito tiramos error
+    if (!cart) throw new Error('Cart not found');
+
+    // buscamos producto
+    const product = await productDAO.getProductById(pid);
+
+    // si no existe el producto tiramos error
+    if (!product) throw new Error('Product not found');
+
+    const existingCartProductIndex = cart.products.findIndex(
+      (item) => item.product.id === pid
+    );
+
+    if (existingCartProductIndex < 0) throw new Error('Product is not in cart');
+
+    cart.products[existingCartProductIndex].quantity =
+      updatedQuantity <= 0 ? 1 : updatedQuantity;
+    await cart.save();
+  }
+
+  async updateCart({ cid, updatedProducts }) {
+    let cart = await this.getCartById(cid);
+
+    // si no existe el carrito tiramos error
+    if (!cart) throw new Error('Cart not found');
+
+    // chequeamos si todos los productos que se quieren agregar existen
+    const productIds = updatedProducts.map((p) => p.product);
+
+    let products = await productDAO.getProductsById(productIds);
+
+    const nonExistingProductIds = productIds.filter(
+      (pid) => !products.some((p) => p._id.toString() === pid)
+    );
+
+    if (nonExistingProductIds.length > 0)
+      throw new Error(
+        `Product with id ${nonExistingProductIds[0]} does not exist`
+      );
+
+    cart.products = updatedProducts;
+
+    return await cart.save();
   }
 }

@@ -74,3 +74,35 @@ export const deleteCart = async (req, res, next) => {
     res.json({ error: err.message });
   }
 };
+
+export const updateProductQuantityInCart = async (req, res, next) => {
+  try {
+    const { cid, pid } = req.params;
+    const { quantity } = req.body;
+
+    await cartDAO.updateProductQuantity({
+      cid,
+      pid,
+      updatedQuantity: +quantity,
+    });
+
+    res.json({ message: 'Successfully updated product quantity in cart' });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+};
+
+export const updateCart = async (req, res, next) => {
+  try {
+    const { cid } = req.params;
+
+    await cartDAO.updateCart({
+      cid,
+      updatedProducts: req.body,
+    });
+
+    res.json({ message: 'Successfully updated product quantity in cart' });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+};

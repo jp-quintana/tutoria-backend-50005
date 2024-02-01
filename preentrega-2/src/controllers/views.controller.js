@@ -14,11 +14,10 @@ export const renderProductsPage = async (req, res, next) => {
     page: page ? page : 1,
   };
 
-  const products = await productDAO.getProducts(query, paginationOptions);
-
-  console.log(products.page);
-  console.log(products.prevLink);
-  console.log(products.nextLink);
+  const products = await productDAO.getPaginatedProducts(
+    query,
+    paginationOptions
+  );
 
   res.render('products', {
     title: 'Home',
@@ -33,8 +32,6 @@ export const renderProduct = async (req, res, next) => {
   const { pid } = req.params;
 
   const product = await productDAO.getProductById(pid);
-
-  console.log(product);
 
   res.render('product', {
     title: 'Product',

@@ -1,11 +1,12 @@
 import productModel from '../../models/product.model.js';
 
 export class ProductMongooseDAO {
-  async getProducts(query, paginationOptions) {
-    // if (!query && !paginationOptions) {
-    //   return await productModel.find().lean();
-    // }
+  async getProducts() {
+    // agregamos un lean() para convertir los docs de mongoose de este arreglo a objetos de js para poder enviarlos al front y que no haya errores. agregamos el { virtual = true } asi cada doc no pierde el id (que tiene el mismo valor que _id) que seteamos en el schema!
+    return await productModel.find().lean({ virtuals: true });
+  }
 
+  async getPaginatedProducts(query, paginationOptions) {
     const products = await productModel.paginate(
       { title: { $regex: query ? query : '', $options: 'i' } },
       { ...paginationOptions, lean: true }
@@ -35,7 +36,14 @@ export class ProductMongooseDAO {
   }
 
   async getProductById(id) {
-    return await productModel.findById(id).lean();
+    // agregamos un lean() para convertir los docs de mongoose de este arreglo a objetos de js para poder enviarlos al front y que no haya errores. agregamos el { virtual = true } asi cada doc no pierde el id (que tiene el mismo valor que _id) que seteamos en el schema!
+    return await productModel.findById(id).lean({ virtuals: true });
+  }
+
+  async getProductsById(productIds) {
+    return await productModel
+      .find({ _id: { $in: productIds } })
+      .lean({ virtuals: true });
   }
 
   async addProduct(obj) {
