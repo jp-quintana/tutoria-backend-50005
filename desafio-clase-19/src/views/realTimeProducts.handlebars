@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="/css/styles.css">
+
+<h1>Real Time Products</h1>
+<div>
+  <h2>Products</h2>
+  <table id='table' border="1">
+  </table>
+  <h2>Form</h2>
+  <form id='form' class="form">
+      <label>
+        <span>Title:</span>
+        <input id="title" type='text' />
+      </label>
+      <label>
+        <span>Description:</span>
+        <input id="description" type='text' />
+      </label>
+      <label>
+        <span>Price:</span>
+        <input id="price" type='number' />
+      </label>
+      <label>
+        <span>Thumbnail:</span>
+        <input id="thumbnail" type='text' />
+      </label>
+      <label>
+        <span>Code:</span>
+        <input id="code" type='text' />
+      </label>
+      <label>
+        <span>Stock:</span>
+        <input id="stock" type='number' />
+      </label>
+      <label>
+        <span>Category:</span>
+        <input id="category" type='text' />
+      </label>
+    </div>
+    <button type='submit'>Submit</button>
+  </form>
+</div>
+
+<script src='/socket.io/socket.io.js'></script>
+<script src='js/index.js'></script>
