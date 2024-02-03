@@ -18,10 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// se declara
+// se declara con "runtimeOptions: { allowProtoPropertiesByDefault: true }" activado para que no haya drama con mongoose
 app.engine(
   'handlebars',
-  handlebars.engine({ allowProtoMethodsByDefault: true })
+  handlebars.engine({ runtimeOptions: { allowProtoPropertiesByDefault: true } })
 );
 // se indica donde se van a guardar las vistas
 app.set('views', 'src/views');
