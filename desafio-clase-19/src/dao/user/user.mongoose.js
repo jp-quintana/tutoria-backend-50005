@@ -5,4 +5,8 @@ export class UserMongooseDAO {
     const user = new userModel(obj);
     return await user.save();
   }
+
+  async getUserByEmail({ email }) {
+    return await userModel.findOne({ email });
+  }
 }
