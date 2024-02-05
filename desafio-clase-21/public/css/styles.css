@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form label:last-child {
+  margin-bottom: 20px;
+}
+
+#products {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+}
+
+#product {
+  display: block;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px #000;
+}
+
+#product p {
+  margin: 5px 0 0;
+}
+
+#pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
