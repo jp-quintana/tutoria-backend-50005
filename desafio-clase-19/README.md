@@ -1,4 +1,4 @@
-# Preentrega: Segunda pre entrega del PF
+# Desafío: Implementación de login
 
 ## Nota
 
@@ -25,6 +25,7 @@ npm i
 MONGO_URI=mongodb+srv://****:****@****
 PORT=8080
 DAO_OPTION=mongoose
+EXPRESS_SECRET=****
 ```
 
 - Paso 4: Levantar el servidor.
