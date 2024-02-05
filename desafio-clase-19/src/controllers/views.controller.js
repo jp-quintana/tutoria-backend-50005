@@ -3,7 +3,7 @@ import { productDAO } from '../dao/product/index.js';
 
 export const renderHomePage = async (req, res, next) => {
   const products = await productDAO.getProducts();
-  res.render('home', { title: 'Home', products });
+  res.render('home', { title: 'Home', products, user: req.session.user });
 };
 
 export const renderProductsPage = async (req, res, next) => {
@@ -21,7 +21,7 @@ export const renderProductsPage = async (req, res, next) => {
   );
 
   res.render('products', {
-    title: 'Home',
+    title: 'Products',
     products: products.payload,
     page: products.page,
     prevLink: products.prevLink,
@@ -50,4 +50,12 @@ export const renderCartPage = async (req, res, next) => {
   const cart = await cartDAO.getCartById(cid);
 
   res.render('cart', { title: 'Cart', products: cart.products });
+};
+
+export const renderLoginPage = async (req, res, next) => {
+  res.render('login', { title: 'Login' });
+};
+
+export const renderRegisterPage = async (req, res, next) => {
+  res.render('register', { title: 'Register' });
 };

@@ -5,6 +5,19 @@
     <title>{{title}}</title>
   </head>
   <body>
-    {{{body}}}
+
+    {{#if user}}
+      <header>
+        <nav>
+          <form action='/api/auth/logout' method='post'>
+            <button type='submit'>Logout</button>
+          </form>
+        </nav>
+      </header>
+    {{/if}}
+
+    <main>
+      {{{body}}}
+    </main>
   </body>
 </html>
