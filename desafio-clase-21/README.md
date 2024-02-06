@@ -1,4 +1,4 @@
-# Desafío: Implementación de login
+# Desafío: Refactor a nuestro login
 
 ## Nota
 
@@ -26,6 +26,7 @@ MONGO_URI=mongodb+srv://****:****@****
 PORT=8080
 DAO_OPTION=mongoose
 EXPRESS_SECRET=****
+GITHUB_CLIENT_SECRET=****
 ```
 
 - Paso 4: Levantar el servidor.
