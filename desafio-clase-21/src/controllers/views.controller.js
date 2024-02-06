@@ -59,3 +59,7 @@ export const renderLoginPage = async (req, res, next) => {
 export const renderRegisterPage = async (req, res, next) => {
   res.render('register', { title: 'Register' });
 };
+
+export const renderRestorePasswordPage = async (req, res, next) => {
+  res.render('restore-password', { title: 'Restore Password' });
+};
