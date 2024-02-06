@@ -11,4 +11,8 @@ export class UserMongooseDAO {
   async getUserByEmail({ email }) {
     return await userModel.findOne({ email }).lean({ virtuals: true });
   }
+
+  async getUserById(id) {
+    return await userModel.findOne({ _id: id }).lean({ virtuals: true });
+  }
 }
