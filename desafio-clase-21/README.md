@@ -27,6 +27,7 @@ PORT=8080
 DAO_OPTION=mongoose
 EXPRESS_SECRET=****
 GITHUB_CLIENT_SECRET=****
+GITHUB_CLIENT_ID=****
 ```
 
 - Paso 4: Levantar el servidor.
