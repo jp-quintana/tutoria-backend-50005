@@ -1,0 +1,16 @@
+<h1>{{{title}}}</h1>
+
+<form action='/api/auth/login' method='POST'>
+  <label for='email'>Email:</label>
+  <input type='text' id='email' name='email' required />
+  <br />
+  <label for='password'>Password:</label>
+  <input type='password' id='password' name='password' required />
+  <br />
+
+  <button type='Submit'>Submit</button>
+  <br />
+
+  <a href='/register'>No account?</a>
+  <a href='/api/auth/github'>Login with Github</a>
+</form>

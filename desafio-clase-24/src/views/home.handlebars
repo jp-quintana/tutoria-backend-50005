@@ -1,0 +1,38 @@
+<h1>{{{title}}}</h1>
+
+{{#if user}}
+  <h2>Hola
+    {{#if user.isAdmin}}
+      Admin
+      {{user.first_name}}!
+    {{else}}
+      Usuario
+      {{user.first_name}}!
+    {{/if}}
+  </h2>
+{{/if}}
+
+<div>
+  <table border='1'>
+    <thead>
+      <tr>
+        {{#each products}}
+          {{#if @first}}
+            {{#each this}}
+              <th>{{@key}}</th>
+            {{/each}}
+          {{/if}}
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+        <tr>
+          {{#each this}}
+            <td>{{this}}</td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
