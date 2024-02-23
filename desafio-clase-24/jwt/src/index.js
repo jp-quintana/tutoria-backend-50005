@@ -1,8 +1,7 @@
 import 'dotenv/config.js';
 
 import express from 'express';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
+import cookieParser from 'cookie-parser';
 import handlebars from 'express-handlebars';
 
 import passport from 'passport';
@@ -17,18 +16,6 @@ import { connectToDB } from './db/mongo.js';
 
 const app = express();
 
-app.use(
-  session({
-    secret: process.env.EXPRESS_SECRET,
-    storte: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
-      ttl: 15,
-    }),
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-
 initializePassport();
 app.use(passport.initialize());
 app.use(passport.session());
@@ -36,6 +23,7 @@ app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(cookieParser());
 
 // se declara con "runtimeOptions: { allowProtoPropertiesByDefault: true }" activado para que no haya drama con mongoose
 app.engine(

@@ -3,10 +3,36 @@ import local from 'passport-local';
 import { userDAO } from '../dao/user/index.js';
 import { checkPassword, createHash } from '../utils/bcrypt.js';
 import { Strategy as GithubStrategy } from 'passport-github2';
+import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 
 const LocalStrategy = local.Strategy;
 
+const cookieExtractor = (req) => {
+  let token = null;
+  if (req) {
+    token = req.cookies['coderCookieToken'];
+  }
+  return token;
+};
+
 export const initializePassport = () => {
+  passport.use(
+    'jwt',
+    new JWTStrategy(
+      {
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey: process.env.PASSPORT_SECRET,
+      },
+      async (jwt_payload, done) => {
+        try {
+          return done(null, jwt_payload);
+        } catch (error) {
+          return done(error);
+        }
+      }
+    )
+  );
+
   passport.use(
     'register',
     new LocalStrategy(
@@ -15,7 +41,7 @@ export const initializePassport = () => {
         usernameField: 'email',
       },
       async (req, username, password, done) => {
-        const { first_name, last_name, age } = req.body;
+        const { first_name, last_name, age, cart } = req.body;
 
         try {
           const user = await userDAO.getUserByEmail({ email: username });
@@ -31,6 +57,7 @@ export const initializePassport = () => {
             last_name,
             email: username,
             age,
+            cart,
             password: hashedPassword,
           });
 
