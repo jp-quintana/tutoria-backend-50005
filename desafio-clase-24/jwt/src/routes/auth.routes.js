@@ -11,22 +11,9 @@ import passport from 'passport';
 
 const router = Router();
 
-router.post(
-  '/register',
-  passport.authenticate('register', {
-    session: false,
-    failureRedirect: '/fail-register',
-  }),
-  register
-);
+router.post('/register', register);
 
-router.post(
-  '/login',
-  passport.authenticate('login', {
-    session: false,
-  }),
-  login
-);
+router.post('/login', login);
 
 router.post('/logout', logout);
 

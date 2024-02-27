@@ -1,8 +1,10 @@
 import 'dotenv/config.js';
 
 import express from 'express';
-import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import handlebars from 'express-handlebars';
+import cookieParser from 'cookie-parser';
 
 import passport from 'passport';
 import { initializePassport } from './config/passport.js';
@@ -15,6 +17,18 @@ import cartRoutes from './routes/cart.routes.js';
 import { connectToDB } from './db/mongo.js';
 
 const app = express();
+
+app.use(
+  session({
+    secret: process.env.EXPRESS_SECRET,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      ttl: 15,
+    }),
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 initializePassport();
 app.use(passport.initialize());

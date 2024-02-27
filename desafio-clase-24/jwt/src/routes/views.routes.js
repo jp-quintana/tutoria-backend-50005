@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import passport from 'passport';
+
 import {
   renderHomePage,
   renderProductsPage,
@@ -8,13 +10,31 @@ import {
   renderRegisterPage,
 } from '../controllers/views.controller.js';
 
+import { noAuth } from '../middleware/auth.js';
+
 const router = Router();
 
-router.get('/', renderHomePage);
-router.get('/products', renderProductsPage);
-router.get('/product/:pid', renderProductPage);
-router.get('/cart/:cid', renderCartPage);
-router.get('/login', renderLoginPage);
-router.get('/register', renderRegisterPage);
+router.get(
+  '/',
+  passport.authenticate('jwt', { session: false, failureRedirect: '/login' }),
+  renderHomePage
+);
+router.get(
+  '/products',
+  passport.authenticate('jwt', { session: false, failureRedirect: '/login' }),
+  renderProductsPage
+);
+router.get(
+  '/product/:pid',
+  passport.authenticate('jwt', { session: false, failureRedirect: '/login' }),
+  renderProductPage
+);
+router.get(
+  '/cart/:cid',
+  passport.authenticate('jwt', { session: false, failureRedirect: '/login' }),
+  renderCartPage
+);
+router.get('/login', noAuth, renderLoginPage);
+router.get('/register', noAuth, renderRegisterPage);
 
 export default router;

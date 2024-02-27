@@ -3,7 +3,7 @@ import { productDAO } from '../dao/product/index.js';
 
 export const renderHomePage = async (req, res, next) => {
   const products = await productDAO.getProducts();
-  res.render('home', { title: 'Home', products, user: req.session.user });
+  res.render('home', { title: 'Home', products, user: req.user });
 };
 
 export const renderProductsPage = async (req, res, next) => {
