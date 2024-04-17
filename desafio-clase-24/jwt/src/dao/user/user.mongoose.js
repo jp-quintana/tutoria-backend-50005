@@ -1,8 +1,14 @@
 import userModel from '../../models/user.model.js';
+import cartModel from '../../models/cart.model.js';
 
 export class UserMongooseDAO {
   async addUser(obj) {
     const user = new userModel(obj);
+
+    const cart = new cartModel();
+
+    user.cart = cart._id;
+
     await user.save();
 
     return user.toObject({ virtuals: true });

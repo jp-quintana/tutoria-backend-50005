@@ -107,6 +107,5 @@ export const loginWithGithub = async (req, res, next) => {
 };
 
 export const getCurrentUser = async (req, res, next) => {
-  // console.log(req.session.user);
-  res.json({ user: req.session.user });
+  res.json({ user: req.user });
 };

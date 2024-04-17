@@ -17,9 +17,10 @@ export class CartMongooseDAO {
   }
 
   async addCart() {
-    const newCart = new cartModel();
+    const cart = new cartModel();
 
-    await newCart.save();
+    await cart.save();
+    return cart;
   }
 
   async addProductToCart({ cid, product }) {

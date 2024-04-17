@@ -17,7 +17,11 @@ router.post('/login', login);
 
 router.post('/logout', logout);
 
-router.get('/current', getCurrentUser);
+router.get(
+  '/current',
+  passport.authenticate('jwt', { session: false }),
+  getCurrentUser
+);
 
 router.get('/fail-register', registerFail);
 
