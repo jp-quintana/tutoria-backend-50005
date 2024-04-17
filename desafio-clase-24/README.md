@@ -1,4 +1,4 @@
-# Desafío: Refactor a nuestro login
+# Desafío: Práctica de integración sobre tu ecommerce
 
 ## Nota
 
@@ -9,9 +9,7 @@ No esta actualizado el dao de fs!
 - Paso 1: clonar repositorio e instalar paquetes.
 
 ```
-git clone https://github.com/jp-quintana/tutoria-backend-50005.git
-
-// ir al directorio correspondiente
+git clone https://github.com/jp-quintana/tutoria-backend-50005.git ./
 
 npm i
 
