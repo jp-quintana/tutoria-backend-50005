@@ -1,0 +1,22 @@
+<link rel='stylesheet' href='/css/styles.css' />
+
+<h1>{{{title}}}
+
+  {{#if product}}
+    <span>
+      {{product.id}}
+    </span>
+  {{/if}}
+
+</h1>
+<a href='http://localhost:8080/products'>Back</a>
+<div>
+  {{#if product}}
+    <ul>
+      {{#each product}}
+        <li>{{@key}}: {{this}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+</div>
