@@ -10,7 +10,7 @@ import passport from 'passport';
 import { initializePassport } from './config/passport.js';
 
 import viewsRoutes from './routes/views.routes.js';
-import authRoutes from './routes/auth.routes.js';
+import sessionRoutes from './routes/session.routes.js';
 import productRoutes from './routes/product.routes.js';
 import cartRoutes from './routes/cart.routes.js';
 
@@ -50,7 +50,7 @@ app.set('views', 'src/views');
 app.set('view engine', 'handlebars');
 
 app.use('/', viewsRoutes);
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', sessionRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/carts', cartRoutes);
 
