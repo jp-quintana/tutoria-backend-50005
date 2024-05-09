@@ -1,4 +1,4 @@
-# Desafío: Práctica de integración sobre tu ecommerce
+# Desafío: Reestructura de nuestro servidor
 
 ## Nota
 
